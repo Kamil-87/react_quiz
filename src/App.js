@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
         <Layout>
-          <div style={{width: 400, border: '1px solid black'}}>
+          <div>
             <Quiz />
           </div>
         </Layout>
