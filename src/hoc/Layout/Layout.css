@@ -1,0 +1,13 @@
+.Layout {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: aqua;
+    border: 1px solid black;
+}
+
+.Layout main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
