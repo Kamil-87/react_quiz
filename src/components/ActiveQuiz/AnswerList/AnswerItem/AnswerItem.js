@@ -3,11 +3,16 @@ import classes from "./AnswerItem.css"
 
 const AnswerItem = props => {
 
-  console.log(props)
+  const cls = [classes.AnswerItem]
+  // console.log(props)
+
+  if(props.state) {
+      cls.push(classes[props.state])
+  }
 
   return (
       <li
-          className={classes.AnswerItem}
+          className={cls.join(' ')}
           onClick={() => props.onAnswerClick(props.answer.id)}
       >
         {props.answer.text}
