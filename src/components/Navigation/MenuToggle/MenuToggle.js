@@ -1,10 +1,23 @@
 import classes from './MenuToggle.module.css'
 
 const MenuToggle = props => {
-  return (
-      <div className={classes.MenuToggle}>
+  const cls = [
+    classes.MenuToggle,
+    'fa'
+  ]
 
-      </div>
+  if(props.isOpen) {
+    cls.push('fa-times')
+    cls.push(classes.open)
+  } else {
+    cls.push('fa-bars')
+  }
+
+  return (
+      <i
+        className={cls.join(' ')}
+        onClick={props.onToggle}
+      />
   )
 }
 
