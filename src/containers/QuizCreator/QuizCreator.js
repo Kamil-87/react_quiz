@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from "axios"
 import classes from './QuizCreator.module.css'
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
@@ -36,16 +37,49 @@ export default class QuizCreator extends Component {
     formControls: createFormControls()
   }
 
-  sibmitHandler = event => {
+  submitHandler = event => {
     event.preventDefault()
   }
 
   addQuestionHandler = event => {
     event.preventDefault()
+
+    const quiz = this.state.quiz.concat()
+    const index = quiz.length + 1
+
+    const {question, option1, option2, option3, option4} = this.state.formControls
+
+    const quistionItem = {
+      question: question.value,
+      id: index,
+      rightAnswerId: this.state.rightAnswerId,
+      answers: [
+        {text: option1.value, id: option1.id},
+        {text: option2.value, id: option2.id},
+        {text: option3.value, id: option3.id},
+        {text: option4.value, id: option4.id},
+      ]
+    }
+    quiz.push(quistionItem)
+
+    this.setState({
+      quiz,
+      isFormValid: false,
+      rightAnswerId: 1,
+      formControls: createFormControls()
+    })
   }
 
-  createQuizHandler = () => {
+  createQuizHandler = event => {
+    event.preventDefault()
 
+    axios.post('https://my-quiz-3682a-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', this.state.quiz)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => console.log(error))
+
+    console.log(this.state.quiz)
   }
 
   changeHandler = (value, controlName) => {
@@ -90,6 +124,13 @@ export default class QuizCreator extends Component {
       rightAnswerId: +event.target.value
     })
   }
+
+  componentDidMount() {
+    axios.get('https://my-quiz-3682a-default-rtdb.europe-west1.firebasedatabase.app/quiz.json').then(response => {
+      console.log(response)
+    })
+  }
+
 
   render() {
     const select = <Select
