@@ -1,7 +1,7 @@
 import React from "react"
 import classes from "./AnswerItem.module.css"
 
-const AnswerItem = props => {
+export const AnswerItem = props => {
 
   const cls = [classes.AnswerItem]
   // console.log(props)
@@ -19,5 +19,3 @@ const AnswerItem = props => {
       </li>
   )
 }
-
-export default AnswerItem

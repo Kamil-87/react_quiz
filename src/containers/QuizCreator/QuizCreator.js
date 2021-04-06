@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import axios from "axios"
+import axios from "../../axios/axios-quiz"
 import classes from './QuizCreator.module.css'
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/Input/Input'
@@ -70,14 +70,23 @@ export default class QuizCreator extends Component {
     })
   }
 
-  createQuizHandler = event => {
+  createQuizHandler = async event => {
     event.preventDefault()
 
-    axios.post('https://my-quiz-3682a-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', this.state.quiz)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => console.log(error))
+    try {
+      const response = await axios.post('quizes.json', this.state.quiz)
+      console.log(response.data)
+
+      this.setState({
+        quiz: [],
+        isFormValid: false,
+        rightAnswerId: 1,
+        formControls: createFormControls()
+      })
+
+    } catch (e) {
+      console.log(e)
+    }
 
     console.log(this.state.quiz)
   }

@@ -1,8 +1,8 @@
 import React from "react"
 import classes from './AnswerList.module.css'
-import AnswerItem from "./AnswerItem/AnswerItem";
+import {AnswerItem} from "./AnswerItem/AnswerItem";
 
-const AnswerList = props => {
+export const AnswerList = props => {
     // console.log('list', props)
     return (
         <ul className={classes.AnswerList}>
@@ -19,5 +19,3 @@ const AnswerList = props => {
         </ul>
     )
 }
-
-export default AnswerList
